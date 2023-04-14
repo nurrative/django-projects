@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     #post
     'post',
+    'review',
 ]
 
 MIDDLEWARE = [
