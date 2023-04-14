@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from post.views import post_list,post_list_api_view,post_details,create_post,delete_post,update_post,update_with_patch
-from review.views import toggle_like
+from review.views import toggle_like,comments
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('listing/',post_list),
@@ -28,4 +28,6 @@ urlpatterns = [
     path('api/update/<int:id>/',update_post),
     path('api/updatepatch/<int:id>/',update_with_patch),
     path('api/like/<int:id>/',toggle_like),
+    path('api/comments/<int:id>/',comments)
+
 ]
