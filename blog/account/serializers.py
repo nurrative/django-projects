@@ -25,14 +25,10 @@ class RegisterUserSerializer(ModelSerializer):
 
 class UserSerializer(ModelSerializer):
     class Meta:
-        model = get_user_model()
+        model = User
         fields = ['username']
 
-class UserListView(APIView):
-    def get(self,request):
-        users = get_user_model().objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+
 
 
         
