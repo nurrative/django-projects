@@ -20,3 +20,9 @@ class RegisterUserSerializer(ModelSerializer):
     
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
+
+# class ListingUserSerializer(ModelSerializer):
+#     class Meta:
+#         model = User
+
+        
