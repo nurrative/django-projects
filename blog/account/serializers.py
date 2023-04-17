@@ -1,5 +1,7 @@
 from rest_framework.serializers import ModelSerializer, CharField, ValidationError
 from django.contrib.auth import get_user_model
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 User = get_user_model()
 
@@ -21,8 +23,16 @@ class RegisterUserSerializer(ModelSerializer):
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
 
-# class ListingUserSerializer(ModelSerializer):
-#     class Meta:
-#         model = User
+class UserSerializer(ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ['username']
+
+class UserListView(APIView):
+    def get(self,request):
+        users = get_user_model().objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
+
 
         
