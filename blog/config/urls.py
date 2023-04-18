@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from post.views import post_list,post_list_api_view,post_details,create_post,delete_post,update_post,update_with_patch
-from review.views import toggle_like,comments
+from review.views import toggle_like,Create_CommentAPIView,UpdateCommentAPIView,DeleteCommentAPIView,comments
 # from account.serializers import UserListView
 from account.views import RegisterUserAPIView,UserListView
 from rest_framework_simplejwt.views import(
@@ -34,10 +34,13 @@ urlpatterns = [
     path('api/update/<int:id>/',update_post),
     path('api/updatepatch/<int:id>/',update_with_patch),
     path('api/like/<int:id>/',toggle_like),
-    path('api/comments/<int:id>/',comments),
+    # path('api/comments/<int:id>/',comments),
     path('api/register/', RegisterUserAPIView.as_view()),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
     path('api/users/',UserListView.as_view()),
+    path('api/comment/create/',Create_CommentAPIView.as_view()),
+    path('api/comment/update/<int:pk>/',UpdateCommentAPIView.as_view()),
+    path('api/comment/delete/<int:pk>/',DeleteCommentAPIView.as_view()),
 
 ]

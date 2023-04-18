@@ -1,11 +1,14 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 
 from .models import Like,Comment
 
 from post.models import Post, User
 from post.serializers import CommentSerializer
+
+from rest_framework.generics import CreateAPIView,UpdateAPIView,DestroyAPIView
 
 
 
@@ -39,3 +42,18 @@ def comments(request, id):
 
     serializer = CommentSerializer(comment)
     return Response(serializer.data, status=201)
+
+class Create_CommentAPIView(CreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+class UpdateCommentAPIView(UpdateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+class DeleteCommentAPIView(DestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
