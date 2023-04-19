@@ -44,6 +44,7 @@ def comments(request, id):
     return Response(serializer.data, status=201)
 
 class Create_CommentAPIView(CreateAPIView):
+    """CRUD"""
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]

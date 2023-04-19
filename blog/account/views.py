@@ -1,9 +1,15 @@
-from rest_framework.views import APIView
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.response import Response
-from .serializers import RegisterUserSerializer,UserSerializer,User
+from rest_framework.views import APIView
+
+from .serializers import RegisterUserSerializer, User, UserSerializer
+
 
 class RegisterUserAPIView(APIView):
+
+    @swagger_auto_schema(request_body=RegisterUserSerializer())
     def post(self, request):
+        print(request.data)
         serializer = RegisterUserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
